@@ -14,8 +14,21 @@ public struct FAText: View {
     private var icon: FAIcon
     var size: CGFloat
     var style: FAStyle
+
     private var weight: Font.Weight {
         return style.weight
+    }
+
+    public init(
+        iconName: String,
+        textStyle: UIFont.TextStyle = .body,
+        iconStyle: FAStyle? = nil
+    ) {
+        self.init(
+            iconName: iconName,
+            size: FAText.systemFontSize(for: textStyle),
+            style: iconStyle
+        )
     }
     
     public init(iconName: String, size: CGFloat, style: FAStyle? = nil) {
@@ -46,5 +59,9 @@ public struct FAText: View {
         Text(icon.unicodeString)
             .font(Font.custom(icon.collection.rawValue, size: size))
             .fontWeight(weight)
+    }
+
+    private static func systemFontSize(`for` textStyle: UIFont.TextStyle = .body) -> CGFloat {
+        return UIFont.preferredFont(forTextStyle: textStyle).pointSize
     }
 }
