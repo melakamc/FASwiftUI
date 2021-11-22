@@ -28,7 +28,12 @@ Easily use FontAwesome in your SwiftUI projects. Supports Font Awesome 5 Pro or 
     3. Name the new entry "Fonts provided by application"
     4. Expand the entry by clicking the triangle to the left
     5. Add a new entry for each of the "otf" files you added to your project, using the full filename including the extension
-6. You're done!
+6. Optional: reduce `icons.json` from 14MB down to 365KB using [jq](https://stedolan.github.io/jq/).
+   ```bash
+   jq -c 'del(.[].changes, .[].ligatures, .[].voted, .[].svg, .[].free)' icons.json > icons-minified.json \
+     && mv icons-minified.json icons.json
+   ```
+7. You're done!
 
 
 ### Usage
