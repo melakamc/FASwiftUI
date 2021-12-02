@@ -20,14 +20,15 @@ public class FontAwesome {
     // MARK: - Published Properties
     // ======================================================= //
     
-    public private(set) var store: [String: FAIcon]
+    public private(set) var store: [String: FAIcon] = [:]
     
     // ======================================================= //
     // MARK: - Initializer
     // ======================================================= //
     
-    init() {
-        let fileURL = Bundle.main.url(forResource: "icons", withExtension: "json")!
+    public init(_ bundle: Bundle = Bundle.main) {
+        guard let fileURL = bundle.url(forResource: "icons", withExtension: "json") else { return }
+
         let jsonString = try! String(contentsOf: fileURL, encoding: .utf8)
         let jsonData = jsonString.data(using: .utf8)!
         let decoder = JSONDecoder()
